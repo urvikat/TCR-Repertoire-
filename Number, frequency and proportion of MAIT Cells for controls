@@ -1,0 +1,116 @@
+not_infected<-which(data_a$control==TRUE) #scans to see if the patient control is true
+Uninfected_TCR<-data_a[not_infected,] #presents data for only rows with true control
+
+total_TCR_uninfected <- aggregate(junction_aa ~ ID + tp_week,    #no. TCR's collected for uninfected patients at a particular timepoint
+                             data = Uninfected_TCR,
+                             FUN = length)
+
+library(ggplot2)
+ggplot(data = total_TCR_uninfected, aes(x=tp_week, y=junction_aa)) +      #plotting no.TCRs against time for uninfected patients
+  geom_point() +
+  geom_line(
+    mapping = aes(x=tp_week, y=junction_aa,
+                  group=ID,
+                  colour=ID)
+  ) +
+  labs(title = "Number of TCRs Against Time for Controls", x = "Timepoint(week)", y = "Number of TCRs")
+
+mait_alpha_v_noninfected <- grep("TRAV1-2",Uninfected_TCR$v_call)
+mait_alpha_j1_noninfected <- grep("TRAJ20",Uninfected_TCR$j_call)
+mait_alpha_j2_noninfected <- grep("TRAJ33",Uninfected_TCR$j_call)
+
+mait_cells_noninfected <- intersect(mait_alpha_v_noninfected,mait_alpha_j1_noninfected)
+mait_cells2_noninfected <- intersect(mait_alpha_v_noninfected,mait_alpha_j2_noninfected) #list of rows that are considered as MAIT cells in noninfected
+
+#rows of raw data that contain MAIT cells for noninfected
+MAIT_Cells_noninfected <- Uninfected_TCR[mait_cells_noninfected,]
+MAIT_Cells2_noninfected <- Uninfected_TCR[mait_cells2_noninfected,]
+
+MAIT_Cells_total_noninfected <- rbind(MAIT_Cells_noninfected,MAIT_Cells2_noninfected)   #all rows in raw data that contain MAIT cells for noninfected
+
+MAIT_total_noninfected <- aggregate(junction_aa ~ ID + tp_week,    #no. MAIT TCR's collected for each patient at a particular timepoint for noninfected
+                        data = MAIT_Cells_total_noninfected,
+                        FUN = length)
+
+library(ggplot2)
+ggplot(data = MAIT_total_noninfected, aes(x=tp_week, y=junction_aa)) +                    #plotting no. mait cell  TCRs against time for noninfected
+  geom_point() +
+  geom_line(
+    mapping = aes(x=tp_week, y=junction_aa,
+                  group=ID,
+                  colour=ID)
+  ) +
+  labs(title = "Number of TCRs that are Considered MAIT Cells Against Time for Controls", x = "Timepoint(week)", y = "Number of TCRs")
+
+MAITnoninfected_and_original_TCR <- merge(total_TCR_alpha2,MAIT_total_noninfected,by=c('ID','tp_week'))    #table with frequency of TCR from original data and MAIT uninfected TCR
+MAITnoninfected_proportions_of_original <- mutate(MAITnoninfected_and_original_TCR, proportion = junction_aa.y/junction_aa.x)  #table with proportions of original uninfected TCR that are MAIT, for each ID at  all timepoints
+library(ggplot2)
+ggplot(MAITnoninfected_proportions_of_original, aes(x = as.numeric(tp_week), y=proportion)) +     #plot of proportion of uninfected TCR of original data that are MAIT cells over time, for each ID
+  geom_point() +
+  geom_line(
+    mapping = aes(x=as.numeric(tp_week), y=proportion,
+                  group=ID,
+                  colour=ID)
+  )+
+  labs(title="Proportion of TCRs Considered as MAIT Cells for Controls",x="Timepoint(Weeks)",y="Proportion of MAIT Cells")
+
+tot_MAIT_frequency_uninfected <- aggregate( x = Uninfected_TCR$proportion,          #totalfrequency of MAIT cells for each ID at all timepoints for uninfected
+                                 by = list(ID=Uninfected_TCR$ID,timepoint=Uninfected_TCR$tp_week),
+                                 FUN = sum)
+
+sorted_ID_MAIT_prop_noninfected <- MAITnoninfected_proportions_of_original[order(MAITnoninfected_proportions_of_original$ID),]
+#ID of proportions of original of Mait cells in noninfected
+ID17_noninfected <- which(sorted_ID_MAIT_prop_noninfected$ID==17)
+ID42_noninfected <- which(sorted_ID_MAIT_prop_noninfected$ID==42)
+ID84_noninfected <- which(sorted_ID_MAIT_prop_noninfected$ID==84)
+ID107_noninfected <- which(sorted_ID_MAIT_prop_noninfected$ID==107)
+ID158_noninfected <- which(sorted_ID_MAIT_prop_noninfected$ID==158)
+ID186_noninfected <- which(sorted_ID_MAIT_prop_noninfected$ID==186)
+
+MAIT_TCR_17_noninfected <-sorted_ID_MAIT_prop_noninfected[ID17_noninfected,] #presents these rows of IDs from data of proportions of MAIT TCRs of original in noninfected
+var_TCR_17_noninfected <- mutate(MAIT_TCR_17_noninfected, variance=var(proportion)) #calculating variance across all tp for ID and adding a column
+
+MAIT_TCR_42_noninfected <-sorted_ID_MAIT_prop_noninfected[ID42_noninfected,] #presents these rows of IDs from data of proportions of MAIT TCRs of original in noninfected
+var_TCR_42_noninfected <- mutate(MAIT_TCR_42_noninfected, variance=var(proportion)) #calculating variance across all tp for ID and adding a column
+
+
+MAIT_TCR_84_noninfected <-sorted_ID_MAIT_prop_noninfected[ID84_noninfected,] #presents these rows of IDs from data of proportions of MAIT TCRs of original in noninfected
+var_TCR_84_noninfected <- mutate(MAIT_TCR_84_noninfected, variance=var(proportion)) #calculating variance across all tp for ID and adding a column
+
+
+MAIT_TCR_107_noninfected <-sorted_ID_MAIT_prop_noninfected[ID107_noninfected,] #presents these rows of IDs from data of proportions of MAIT TCRs of original in noninfected
+var_TCR_107_noninfected <- mutate(MAIT_TCR_107_noninfected, variance=var(proportion)) #calculating variance across all tp for ID and adding a column
+
+MAIT_TCR_158_noninfected <-sorted_ID_MAIT_prop_noninfected[ID158_noninfected,] #presents these rows of IDs from data of proportions of MAIT TCRs of original in noninfected
+var_TCR_158_noninfected <- mutate(MAIT_TCR_158_noninfected, variance=var(proportion)) #calculating variance across all tp for ID and adding a column
+
+MAIT_TCR_186_noninfected <-sorted_ID_MAIT_prop_noninfected[ID186_noninfected,] #presents these rows of IDs from data of proportions of MAIT TCRs of original in noninfected
+var_TCR_186_noninfected <- mutate(MAIT_TCR_186_noninfected, variance=var(proportion)) #calculating variance across all tp for ID and adding a column
+
+
+Var_noninfected_MAIT <- rbind(var_TCR_17_noninfected,var_TCR_42_noninfected,var_TCR_84_noninfected,var_TCR_107_noninfected,var_TCR_158_noninfected,var_TCR_186_noninfected) #binding rows of sample MAIT TCR with variances
+
+#plotting graph to show change in variance across TP
+library(ggplot2)
+ggplot(Var_noninfected_MAIT, aes(x = tp_week, y=variance)) +   
+  geom_point() +
+  geom_line(
+    mapping = aes(x=tp_week, y=variance,
+                  group=ID,
+                  colour=ID)
+  )
+
+tot_MAIT_frequency_noninfected <- aggregate( x = MAIT_Cells_total_noninfected$proportion,          #totalfrequency of MAIT cells for each ID at all timepoints for controls
+                                 by = list(ID=MAIT_Cells_total_noninfected$ID,timepoint=MAIT_Cells_total_noninfected$tp_week),
+                                 FUN = sum)
+
+library(ggplot2)     
+ggplot(tot_MAIT_frequency_noninfected, aes(x = timepoint, y=x)) +   #plot of sum of frequency of MAIT cells at for each  patient  ID that is a control
+  geom_point() +
+  geom_line(
+    mapping = aes(x=timepoint, y=x,
+                  group=ID,
+                  colour=ID)
+  ) +
+  labs(title="Total Frequency of MAIT Cells Against Time for Controls",x="Timepoint(Weeks)",y="Frequency of MAIT Cells")
+

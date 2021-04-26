@@ -1,0 +1,41 @@
+mait_alpha_v <- grep("TRAV1-2",data_a$v_call)
+mait_alpha_j1 <- grep("TRAJ20", data_a$j_call)
+mait_alpha_j2 <- grep("TRAJ33", data_a$j_call)
+
+mait_cells <- intersect(mait_alpha_v,mait_alpha_j1)
+mait_cells2 <- intersect(mait_alpha_v,mait_alpha_j2) #list of rows that are considered as MAIT cells
+
+#list of sample ID for no. TCRs that change
+TCRS_change <- list(c(35, 36, 55, 69, 77, 79, 81, 90, 101, 113, 123, 128, 134, 135, 146, 151, 153, 157, 170, 175, 180, 184, 195, 196, 199, 229, 241, 252, 267, 268, 282,  296, 299, 303, 324, 333, 343, 369, 371, 373, 389))
+
+
+#rows of raw data that contain MAIT cells
+MAIT_Cells <- data_a[mait_cells,]
+MAIT_Cells2 <- data_a[mait_cells2,]
+
+MAIT_Cells_total <- rbind(MAIT_Cells,MAIT_Cells2)   #all rows in raw data that contain MAIT cells
+
+#list of sample IDs from raw data that contain MAIT cells, without duplicates
+MAIT_Cells_SampleID <- unique(MAIT_Cells_total$ID)
+
+#list of sample IDs that contain MAIT cells and no.TCRs change
+MAIT_cells_ID <- list(c(MAIT_Cells_SampleID))
+
+MAIT_Cells_TCR_Change <- list(c(35, 36, 55, 69, 77, 79, 81, 90, 101, 113, 123, 128, 134, 135, 146, 151, 153, 157, 170, 175, 180, 184, 195, 196, 199, 229, 252, 267, 268, 282, 296, 299, 303, 324, 333, 343, 369, 371, 373, 389))
+#dup <- data_tsv_alpha[order(-data_tsv_alpha$duplicate_count),]
+
+#total no. TCR of MAIT cells
+MAIT_total <- aggregate(junction_aa ~ ID + tp_week,    #no. MAIT TCR's collected for each patient at a particular timepoint
+                        data = MAIT_Cells_total,
+                        FUN = length)
+
+library(ggplot2)
+ggplot(data = MAIT_total, aes(x=tp_week, y=junction_aa)) +                    #plotting no. mait cell  TCRs against time
+  geom_point() +
+  geom_line(
+    mapping = aes(x=tp_week, y=junction_aa,
+                  group=ID,
+                  colour=ID)
+  ) +
+  labs(title = "Number of TCRs that are Considered MAIT Cells Against Time", x = "Timepoint(week)", y = "Number of TCRs")
+  

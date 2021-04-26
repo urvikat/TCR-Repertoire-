@@ -72,6 +72,3 @@ ggplot(prop_MAIT_small_6, aes(x = as.numeric(tp_week), y=proportion)) +     #plo
   labs(title = "Proportion of TCRs that are Considered MAIT Cells for ID 157-177",x="Timepoint(Week)",y="Proportion of MAIT Cells")
 
 
-#Applying Wilcox rank test to find if there is a difference between the variance of proportion of MAIT cells compared to original, in the infected sample, and non infected
-Wilcox_test_result = wilcox.test(Var_noninfected_MAIT$variance, Var_sample_MAIT$variance, exact = FALSE)
-wilcox.test(unique(Var_noninfected_MAIT$variance), unique(Var_sample_MAIT$variance), exact = FALSE)

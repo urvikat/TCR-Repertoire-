@@ -75,3 +75,8 @@ var_TCR_186_noninfected_freq <- mutate(MAIT_TCR_186_noninfected_freq, variance=v
 
 
 Var_noninfected_MAIT_freq <- rbind(var_TCR_17_noninfected_freq,var_TCR_42_noninfected_freq,var_TCR_84_noninfected_freq,var_TCR_107_noninfected_freq,var_TCR_158_noninfected_freq,var_TCR_186_noninfected_freq) #binding rows of sample MAIT TCR with variances
+
+
+#Applying Wilcox rank test to find if there is a difference between the variance of frequency of MAIT cells , in the infected sample, and non infected
+Wilcox_test_result_freq = wilcox.test(Var_noninfected_MAIT_freq$variance, Var_sample_MAIT_freq$variance, exact = FALSE)
+wilcox.test(unique(Var_noninfected_MAIT_freq$variance), unique(Var_sample_MAIT_freq$variance), exact = FALSE)

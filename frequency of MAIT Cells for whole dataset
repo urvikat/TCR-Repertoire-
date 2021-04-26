@@ -88,3 +88,17 @@ ggplot(freq_MAIT_small6, aes(x = timepoint, y=x)) +    #plot sum of frequency of
   ) +
   labs(title="Total Frequency of MAIT Cells Against Time for ID 134-177",x="Timepoint(Weeks)",y="Frequency of MAIT Cells")
 
+
+#binding rows of these IDs which show change in MAIT TCR frequency
+freq_MAIT_change <- rbind(MAIT_TCR_69,MAIT_TCR_151,MAIT_TCR_146,MAIT_TCR_153,MAIT_TCR_229)
+
+#plotting rows of IDS which show change in MAIT TCR frequency
+library(ggplot2)     
+ggplot(freq_MAIT_change, aes(x = timepoint, y=x)) +   
+  geom_point() +
+  geom_line(
+    mapping = aes(x=timepoint, y=x,
+                  group=ID,
+                  colour=ID)
+  ) +
+  labs(title="Total Frequency of MAIT Cells Against Time for ID69, ID146, ID151, ID153, ID229",x="Timepoint(Weeks)",y="Frequency of MAIT Cells")

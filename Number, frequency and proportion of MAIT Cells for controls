@@ -42,7 +42,7 @@ ggplot(data = MAIT_total_noninfected, aes(x=tp_week, y=junction_aa)) +          
   ) +
   labs(title = "Number of TCRs that are Considered MAIT Cells Against Time for Controls", x = "Timepoint(week)", y = "Number of TCRs")
 
-MAITnoninfected_and_original_TCR <- merge(total_TCR_alpha2,MAIT_total_noninfected,by=c('ID','tp_week'))    #table with frequency of TCR from original data and MAIT uninfected TCR
+MAITnoninfected_and_original_TCR <- merge(total_TCR_alpha2,MAIT_total_noninfected,by=c('ID','tp_week'))    #table with number of TCR from original data and MAIT uninfected TCR
 MAITnoninfected_proportions_of_original <- mutate(MAITnoninfected_and_original_TCR, proportion = junction_aa.y/junction_aa.x)  #table with proportions of original uninfected TCR that are MAIT, for each ID at  all timepoints
 library(ggplot2)
 ggplot(MAITnoninfected_proportions_of_original, aes(x = as.numeric(tp_week), y=proportion)) +     #plot of proportion of uninfected TCR of original data that are MAIT cells over time, for each ID

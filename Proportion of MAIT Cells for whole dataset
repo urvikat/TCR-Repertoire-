@@ -1,0 +1,74 @@
+MAIT_and_original_TCR <- merge(total_TCR_alpha2,MAIT_total,by=c('ID','tp_week'))    #table with number of TCR from original data and MAIT TCR
+MAIT_proportions_of_original <- mutate(MAIT_and_original_TCR, proportion = junction_aa.y/junction_aa.x)  #table with proportions of original TCR that are MAIT, for each ID at  all timepoints
+library(ggplot2)
+ggplot(MAIT_proportions_of_original, aes(x = as.numeric(tp_week), y=proportion)) +     #plot of proportion of TCR of original data that are MAIT cells over time, for each ID
+  geom_point() +
+  geom_line(
+    mapping = aes(x=as.numeric(tp_week), y=proportion,
+                  group=ID,
+                  colour=ID)
+  ) +
+  labs(title="Proportion of TCRs that are MAIT Cells Against Time",x="Timepoint(Week)",y="Proportion of MAIT Cells")
+
+prop_MAIT_small <- MAIT_proportions_of_original[1:23,]   #table of rows 1-23of proportion of MAIT cells of original
+library(ggplot2)
+ggplot(prop_MAIT_small, aes(x = as.numeric(tp_week), y=proportion)) +     #plot of proportion of expanded TCR that are MAIT cells over time, for each ID
+  geom_point() +
+  geom_line(
+    mapping = aes(x=as.numeric(tp_week), y=proportion,
+                  group=ID,
+                  colour=ID)
+  ) +
+  labs(title = "Proportion of TCRs that are Considered MAIT Cells for ID 1-23",x="Timepoint(Week)",y="Proportion of MAIT Cells")
+
+prop_MAIT_small_2 <- MAIT_proportions_of_original[24:54,]
+ggplot(prop_MAIT_small_2, aes(x = as.numeric(tp_week), y=proportion)) +     #plot of proportion of expanded TCR that are MAIT cells over time, for each ID
+  geom_point() +
+  geom_line(
+    mapping = aes(x=as.numeric(tp_week), y=proportion,
+                  group=ID,
+                  colour=ID)
+  )+
+  labs(title = "Proportion of TCRs that are Considered MAIT Cells for ID 24-54",x="Timepoint(Week)",y="Proportion of MAIT Cells")
+
+prop_MAIT_small_3 <- MAIT_proportions_of_original[55:101,]
+ggplot(prop_MAIT_small_3, aes(x = as.numeric(tp_week), y=proportion)) +     #plot of proportion of expanded TCR that are MAIT cells over time, for each ID
+  geom_point() +
+  geom_line(
+    mapping = aes(x=as.numeric(tp_week), y=proportion,
+                  group=ID,
+                  colour=ID)
+  )+
+  labs(title = "Proportion of TCRs that are Considered MAIT Cells for ID 55-101",x="Timepoint(Week)",y="Proportion of MAIT Cells")
+
+prop_MAIT_small_4 <- MAIT_proportions_of_original[102:124,]
+ggplot(prop_MAIT_small_4, aes(x = as.numeric(tp_week), y=proportion)) +     #plot of proportion of expanded TCR that are MAIT cells over time, for each ID
+  geom_point() +
+  geom_line(
+    mapping = aes(x=as.numeric(tp_week), y=proportion,
+                  group=ID,
+                  colour=ID)
+  )+
+  labs(title = "Proportion of TCRs that are Considered MAIT Cells for ID 102-124",x="Timepoint(Week)",y="Proportion of MAIT Cells")
+
+prop_MAIT_small_5 <- MAIT_proportions_of_original[125:156,]
+ggplot(prop_MAIT_small_5, aes(x = as.numeric(tp_week), y=proportion)) +     #plot of proportion of expanded TCR that are MAIT cells over time, for each ID
+  geom_point() +
+  geom_line(
+    mapping = aes(x=as.numeric(tp_week), y=proportion,
+                  group=ID,
+                  colour=ID)
+  )+
+  labs(title = "Proportion of TCRs that are Considered MAIT Cells for ID 125-156",x="Timepoint(Week)",y="Proportion of MAIT Cells")
+
+prop_MAIT_small_6 <- MAIT_proportions_of_original[157:177,]
+ggplot(prop_MAIT_small_6, aes(x = as.numeric(tp_week), y=proportion)) +     #plot of proportion of expanded TCR that are MAIT cells over time, for each ID
+  geom_point() +
+  geom_line(
+    mapping = aes(x=as.numeric(tp_week), y=proportion,
+                  group=ID,
+                  colour=ID)
+  )+
+  labs(title = "Proportion of TCRs that are Considered MAIT Cells for ID 157-177",x="Timepoint(Week)",y="Proportion of MAIT Cells")
+
+

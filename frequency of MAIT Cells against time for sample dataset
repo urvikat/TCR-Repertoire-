@@ -1,0 +1,15 @@
+tot_MAIT_frequency_sample <- aggregate( x = Mait_total_in_sample$proportion,          #total frequency of MAIT cells for each ID at all timepoints
+                                             by = list(ID=Mait_total_in_sample$ID,timepoint=Mait_total_in_sample$tp_week),
+                                             FUN = sum)
+
+library(ggplot2)     
+ggplot(tot_MAIT_frequency_sample, aes(x = timepoint, y=x)) +   #plot of sum of frequency of MAIT cells  for each  patient  ID
+  geom_point() +
+  geom_line(
+    mapping = aes(x=timepoint, y=x,
+                  group=ID,
+                  colour=ID)
+  ) +
+  labs(title="Total Frequency of MAIT Cells Against Time for Sample",x="Timepoint(Weeks)",y="Frequency of MAIT Cells")
+
+

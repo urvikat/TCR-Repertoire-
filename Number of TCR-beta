@@ -1,0 +1,15 @@
+#table for total numberof TCR Beta
+total_TCR_Beta <- aggregate(junction_aa ~ ID + timepoint,
+                            data = data_tsv_beta,
+                            FUN = length)
+
+total_TCRb <- total_TCR_Beta
+
+#converting timepoints to numeric and adding a column to data
+tpweek <- rep(100,dim(total_TCRb)[1])
+tpweek[which(total_TCRb$timepoint=="BL")] <- 0
+tpsplit <- strsplit(total_TCRb$timepoint, "U")
+ispl <- which(sapply(tpsplit, length)==2)
+tweek <- as.numeric(sapply(tpsplit[ispl], function(x){x[2]}))
+tpweek[ispl] <- tweek
+total_TCRb$tpweek <- tpweek

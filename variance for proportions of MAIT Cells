@@ -38,6 +38,41 @@ var_TCR_90_sample <- mutate(MAIT_TCR_90_sample, variance=var(proportion)) #calcu
 
 Var_sample_MAIT <- rbind(var_TCR_35_sample,var_TCR_36_sample,var_TCR_55_sample,var_TCR_69_sample,var_TCR_77_sample,var_TCR_79_sample,var_TCR_79_sample,var_TCR_81_sample,var_TCR_90_sample) #binding rows of sample MAIT TCR with variances
 
+sorted_ID_MAIT_prop_noninfected <- MAITnoninfected_proportions_of_original[order(MAITnoninfected_proportions_of_original$ID),]
+#ID of proportions of original of Mait cells in noninfected
+ID17_noninfected <- which(sorted_ID_MAIT_prop_noninfected$ID==17)
+ID42_noninfected <- which(sorted_ID_MAIT_prop_noninfected$ID==42)
+ID84_noninfected <- which(sorted_ID_MAIT_prop_noninfected$ID==84)
+ID107_noninfected <- which(sorted_ID_MAIT_prop_noninfected$ID==107)
+ID158_noninfected <- which(sorted_ID_MAIT_prop_noninfected$ID==158)
+ID186_noninfected <- which(sorted_ID_MAIT_prop_noninfected$ID==186)
+
+MAIT_TCR_17_noninfected <-sorted_ID_MAIT_prop_noninfected[ID17_noninfected,] #presents these rows of IDs from data of proportions of MAIT TCRs of original in noninfected
+var_TCR_17_noninfected <- mutate(MAIT_TCR_17_noninfected, variance=var(proportion)) #calculating variance across all tp for ID and adding a column
+
+MAIT_TCR_42_noninfected <-sorted_ID_MAIT_prop_noninfected[ID42_noninfected,] #presents these rows of IDs from data of proportions of MAIT TCRs of original in noninfected
+var_TCR_42_noninfected <- mutate(MAIT_TCR_42_noninfected, variance=var(proportion)) #calculating variance across all tp for ID and adding a column
+
+
+MAIT_TCR_84_noninfected <-sorted_ID_MAIT_prop_noninfected[ID84_noninfected,] #presents these rows of IDs from data of proportions of MAIT TCRs of original in noninfected
+var_TCR_84_noninfected <- mutate(MAIT_TCR_84_noninfected, variance=var(proportion)) #calculating variance across all tp for ID and adding a column
+
+
+MAIT_TCR_107_noninfected <-sorted_ID_MAIT_prop_noninfected[ID107_noninfected,] #presents these rows of IDs from data of proportions of MAIT TCRs of original in noninfected
+var_TCR_107_noninfected <- mutate(MAIT_TCR_107_noninfected, variance=var(proportion)) #calculating variance across all tp for ID and adding a column
+
+MAIT_TCR_158_noninfected <-sorted_ID_MAIT_prop_noninfected[ID158_noninfected,] #presents these rows of IDs from data of proportions of MAIT TCRs of original in noninfected
+var_TCR_158_noninfected <- mutate(MAIT_TCR_158_noninfected, variance=var(proportion)) #calculating variance across all tp for ID and adding a column
+
+MAIT_TCR_186_noninfected <-sorted_ID_MAIT_prop_noninfected[ID186_noninfected,] #presents these rows of IDs from data of proportions of MAIT TCRs of original in noninfected
+var_TCR_186_noninfected <- mutate(MAIT_TCR_186_noninfected, variance=var(proportion)) #calculating variance across all tp for ID and adding a column
+
+
+Var_noninfected_MAIT <- rbind(var_TCR_17_noninfected,var_TCR_42_noninfected,var_TCR_84_noninfected,var_TCR_107_noninfected,var_TCR_158_noninfected,var_TCR_186_noninfected) #binding rows of sample MAIT TCR with variances
+
+
+
+
 #Applying Wilcox rank test to find if there is a difference between the variance of proportion of MAIT cells compared to original, in the infected sample, and non infected
 Wilcox_test_result = wilcox.test(Var_noninfected_MAIT$variance, Var_sample_MAIT$variance, exact = FALSE)
 wilcox.test(unique(Var_noninfected_MAIT$variance), unique(Var_sample_MAIT$variance), exact = FALSE)

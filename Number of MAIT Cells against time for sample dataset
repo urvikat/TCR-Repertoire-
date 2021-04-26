@@ -1,0 +1,28 @@
+#finding no. MAIT cells in random sample of TCR alpha
+
+mait_v <- grep("TRAV1-2", subsample$v_call)
+mait_j1 <- grep("TRAJ20", subsample$j_call)
+mait_j2 <- grep("TRAJ33", subsample$j_call)
+
+Mait_cells <- intersect(mait_v, mait_j1)
+Mait_cells2 <- intersect(mait_v, mait_j2)    #list of rows from sample that are considered MAIT cells
+
+#rows from sample that contain MAIT cells
+MAit_cells <- subsample[Mait_cells,]
+MAit_cells2 <- subsample[Mait_cells2,]
+
+Mait_total_in_sample <- rbind(MAit_cells,MAit_cells2)  #all rows in sample that containt MAIT cells
+
+Mait_total_TCR_sample <- aggregate(junction_aa ~ ID + tp_week,    #total no. TCR in mait cells in sample
+                                   data = Mait_total_in_sample,
+                                   FUN = length)
+
+library(ggplot2)                                               #plot of total no. TCR in Mait cells in sample
+ggplot(Mait_total_TCR_sample, aes(x=tp_week, y=junction_aa)) +
+  geom_point() +
+  geom_line(
+    mapping = aes(x=tp_week, y=junction_aa,
+                  group=ID,
+                  colour=ID)
+  )+
+  labs(title="Total Number of Sample Mait Cell TCRs Against Time",x="Timepoint(Weeks)",y="Number of TCRs")

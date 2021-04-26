@@ -12,6 +12,18 @@ week <- as.numeric(sapply(tp_split[i_spl], function(x){x[2]}))
 tp_week[i_spl] <- week
 data_a$tp_week <- tp_week
 
-ggplot(data = total_TCR_alpha2) +
-  geom_point(mapping = aes(x = tp_week, y = junction_aa)) +
-  labs(title = "Number of TCRs against time", x = "Timepoint(week)", y = "Number of TCRs")#plotting  total no.TCR against numeric timepoint
+total_TCR_alpha2 <- aggregate(junction_aa ~ ID + tp_week,  #re plotting total TCR alpha with numeric values as timepoint
+                              data = data_a,
+                              FUN = length)
+
+library(ggplot2)
+ggplot(data = total_TCR_alpha2, aes(x=tp_week, y=junction_aa)) +                    
+  geom_point() +
+  geom_line(
+    mapping = aes(x=tp_week, y=junction_aa,
+                  group=ID,
+                  colour=ID)
+  ) +
+  labs(title = "Number of TCR-alpha's Against Time", x = "Timepoint(week)", y = "Number of TCRs") #plotting  total no.TCR against numeric timepoint
+
+

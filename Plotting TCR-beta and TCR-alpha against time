@@ -1,0 +1,18 @@
+#binding TCR alpha and TCR beta dataset
+TCR_beta_alpha <- cbind(total_TCRa, total_TCRb)
+
+#renaming columns
+#names(TCR_beta_alpha) <- c("ID-a", "timepoint-a", "no. TCR alpha", "tpweek-a", "ID-b", "timepoint-b", "no. TCR beta", "tpweek-b" )
+
+#deleting duplicate columns
+TCR_beta_alpha <- TCR_beta_alpha[-4]
+TCR_beta_alpha <- TCR_beta_alpha[-4]
+TCR_beta_alpha <- TCR_beta_alpha[-4]
+
+
+library(ggplot2)
+ggplot(TCR_beta_alpha, aes(x = tpweek)) +
+  geom_point(aes(y = junction_aa, colour = "TCR-alpha")) +
+  geom_point(aes(y = junction_aa.1, colour = "TCR-beta")) +
+  labs(title="Number of TCR-alpha and Number of TCR-beta Against Time",x="Timepoint(weeks)",y="Number of TCRs")
+#plot no.TCR alpha against no. TCR beta

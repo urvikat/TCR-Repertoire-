@@ -1,6 +1,8 @@
+
+
 tot_MAIT_frequency <- aggregate( x = MAIT_Cells_total$proportion,          #totalfrequency of MAIT cells for each ID at all timepoints
-           by = list(ID=MAIT_Cells_total$ID,timepoint=MAIT_Cells_total$tp_week),
-           FUN = sum)
+                                 by = list(ID=MAIT_Cells_total$ID,timepoint=MAIT_Cells_total$tp_week),
+                                 FUN = sum)
 
 
 library(ggplot2)     
@@ -10,5 +12,79 @@ ggplot(tot_MAIT_frequency, aes(x = timepoint, y=x)) +   #plot of sum of frequenc
     mapping = aes(x=timepoint, y=x,
                   group=ID,
                   colour=ID)
+  )
+
+#plotting patient ID seperatly
+sorted_ID <- tot_MAIT_frequency[order(tot_MAIT_frequency$ID),]
+freq_MAIT_small <- sorted_ID[1:36,]  #table of rows 1-36of proportion of MAIT cells of original
+library(ggplot2)
+ggplot(freq_MAIT_small, aes(x = timepoint, y=x)) +     #plot sum of frequency of MAIT cells over time, for ID 1-36
+  geom_point() +
+  geom_line(
+    mapping = aes(x=timepoint, y=x,
+                  group=ID,
+                  colour=ID)
   ) +
-  labs(title="Total Frequency of MAIT Cells Against Time",x="Timepoint(Weeks)",y="Frequency of MAIT Cells")
+  labs(title="Total Frequency of MAIT Cells Against Time for ID 1-36",x="Timepoint(Weeks)",y="Frequency of MAIT Cells")
+
+freq_MAIT_small2 <- sorted_ID[37:62,]  #table of rows 37-62 of proportion of MAIT cells of original
+library(ggplot2)
+ggplot(freq_MAIT_small2, aes(x = timepoint, y=x)) + #plot sum of frequency of MAIT cells over time, for ID 37-62
+  geom_point() +
+  geom_line(
+    mapping = aes(x=timepoint, y=x,
+                  group=ID,
+                  colour=ID)
+  ) +
+  labs(title="Total Frequency of MAIT Cells Against Time for ID 37-62",x="Timepoint(Weeks)",y="Frequency of MAIT Cells")
+
+
+freq_MAIT_small3 <- sorted_ID[63:91,]  #table of rows 63-91 of proportion of MAIT cells of original
+library(ggplot2)
+ggplot(freq_MAIT_small3, aes(x = timepoint, y=x)) +     #plot sum of frequency of MAIT cells over time, for ID 63-91
+  geom_point() +
+  geom_line(
+    mapping = aes(x=timepoint, y=x,
+                  group=ID,
+                  colour=ID)
+  ) +
+  labs(title="Total Frequency of MAIT Cells Against Time for ID 63-91",x="Timepoint(Weeks)",y="Frequency of MAIT Cells")
+
+
+freq_MAIT_small4 <- sorted_ID[92:117,]  #table of rows 92-117 of proportion of MAIT cells of original
+library(ggplot2)
+ggplot(freq_MAIT_small4, aes(x = timepoint, y=x)) +     #plot sum of frequency of MAIT cells over time, for ID 92-117
+  geom_point() +
+  geom_line(
+    mapping = aes(x=timepoint, y=x,
+                  group=ID,
+                  colour=ID)
+  ) +
+  labs(title="Total Frequency of MAIT Cells Against Time for ID 92-117",x="Timepoint(Weeks)",y="Frequency of MAIT Cells")
+
+
+
+freq_MAIT_small5 <- sorted_ID[118:133,]  #table of rows 118-133 of proportion of MAIT cells of original
+library(ggplot2)
+ggplot(freq_MAIT_small5, aes(x = timepoint, y=x)) +     #plot sum of frequency of MAIT cells over time, for ID 118-133
+  geom_point() +
+  geom_line(
+    mapping = aes(x=timepoint, y=x,
+                  group=ID,
+                  colour=ID)
+  ) +
+  labs(title="Total Frequency of MAIT Cells Against Time for ID 118-133",x="Timepoint(Weeks)",y="Frequency of MAIT Cells")
+
+
+
+freq_MAIT_small6 <- sorted_ID[134:177,]  #table of rows 134-177 of proportion of MAIT cells of original
+library(ggplot2)
+ggplot(freq_MAIT_small6, aes(x = timepoint, y=x)) +    #plot sum of frequency of MAIT cells over time, for ID 134-177
+  geom_point() +
+  geom_line(
+    mapping = aes(x=timepoint, y=x,
+                  group=ID,
+                  colour=ID)
+  ) +
+  labs(title="Total Frequency of MAIT Cells Against Time for ID 134-177",x="Timepoint(Weeks)",y="Frequency of MAIT Cells")
+

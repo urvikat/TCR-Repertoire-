@@ -1,0 +1,18 @@
+#sample from original TCR alpha  dataset
+index <- sample(1:(10^6))
+index[1:100]
+subsample <- data_a[index,]
+
+sample_total_TCR <- aggregate(junction_aa ~ ID + tp_week,    #sample no. TCR's collected for each patient at a particular timepoint
+                              data = subsample,
+                              FUN = length)
+
+library(ggplot2)             #plot of total no. TCR for sample
+ggplot(sample_total_TCR, aes(x=tp_week, y=junction_aa)) +
+  geom_point() +
+  geom_line( 
+    mapping = aes(x=tp_week, y=junction_aa,
+                           group=ID,
+                           colour=ID)) +
+  labs(title="Number of TCR-alpha's Against Time for the Subsample", x="Timepoint (Week)", y="Number of TCRs") 
+

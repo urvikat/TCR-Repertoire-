@@ -1,0 +1,77 @@
+sorted_ID_MAIT_freq_sample <- tot_MAIT_frequency_sample[order(tot_MAIT_frequency_sample$ID),]
+#ID of frequency of of Mait cells in the sample
+ID35_sample_freq <- which(sorted_ID_MAIT_freq_sample$ID==35)
+ID36_sample_freq <- which(sorted_ID_MAIT_freq_sample$ID==36)
+ID55_sample_freq <- which(sorted_ID_MAIT_freq_sample$ID==55)
+ID69_sample_freq <- which(sorted_ID_MAIT_freq_sample$ID==69)
+ID77_sample_freq <- which(sorted_ID_MAIT_freq_sample$ID==77)
+ID79_sample_freq <- which(sorted_ID_MAIT_freq_sample$ID==79)
+ID81_sample_freq <- which(sorted_ID_MAIT_freq_sample$ID==81)
+ID90_sample_freq <- which(sorted_ID_MAIT_freq_sample$ID==90)
+
+MAIT_TCR_35_sample_freq <-sorted_ID_MAIT_freq_sample[ID35_sample_freq,] #presents these rows of IDs from data of frequency of MAIT TCRs in sample
+var_TCR_35_sample_freq <- mutate(MAIT_TCR_35_sample_freq, variance=var(x)) #calculating variance across all tp for ID 35 and adding a column
+
+MAIT_TCR_36_sample_freq <-sorted_ID_MAIT_freq_sample[ID36_sample_freq,] #presents these rows of IDs from data of frequency of MAIT TCRs in sample
+var_TCR_36_sample_freq <- mutate(MAIT_TCR_36_sample_freq, variance=var(x)) #calculating variance across all tp for ID 36 and adding a column
+
+
+MAIT_TCR_55_sample_freq <-sorted_ID_MAIT_freq_sample[ID55_sample_freq,] #presents these rows of IDs from data of frequency of MAIT TCRs in sample
+var_TCR_55_sample_freq <- mutate(MAIT_TCR_55_sample_freq, variance=var(x)) #calculating variance across all tp for ID 55 and adding a column
+
+
+MAIT_TCR_69_sample_freq <-sorted_ID_MAIT_freq_sample[ID69_sample_freq,] #presents these rows of IDs from data of frequency of MAIT TCRs in sample
+var_TCR_69_sample_freq <- mutate(MAIT_TCR_69_sample_freq, variance=var(x)) #calculating variance across all tp for ID 69 and adding a column
+
+
+MAIT_TCR_77_sample_freq <-sorted_ID_MAIT_freq_sample[ID77_sample_freq,] #presents these rows of IDs from data of frequency of MAIT TCRs in sample
+var_TCR_77_sample_freq <- mutate(MAIT_TCR_77_sample_freq, variance=var(x)) #calculating variance across all tp for ID 77 and adding a column
+
+MAIT_TCR_79_sample_freq <-sorted_ID_MAIT_freq_sample[ID79_sample_freq,] #presents these rows of IDs from data of frequency of MAIT TCRs in sample
+var_TCR_79_sample_freq <- mutate(MAIT_TCR_79_sample_freq, variance=var(x)) #calculating variance across all tp for ID 79 and adding a column
+
+MAIT_TCR_81_sample_freq <-sorted_ID_MAIT_freq_sample[ID81_sample_freq,] #presents these rows of IDs from data of frequency of MAIT TCRs in sample
+var_TCR_81_sample_freq <- mutate(MAIT_TCR_81_sample_freq, variance=var(x)) #calculating variance across all tp for ID 81 and adding a column
+
+MAIT_TCR_90_sample_freq <-sorted_ID_MAIT_freq_sample[ID90_sample_freq,] #presents these rows of IDs from data of frequency of MAIT TCRs in sample
+var_TCR_90_sample_freq <- mutate(MAIT_TCR_90_sample_freq, variance=var(x)) #calculating variance across all tp for ID 90 and adding a column
+
+Var_sample_MAIT_freq <- rbind(var_TCR_35_sample_freq,var_TCR_36_sample_freq,var_TCR_55_sample_freq,var_TCR_69_sample_freq,var_TCR_77_sample_freq,var_TCR_79_sample_freq,var_TCR_79_sample_freq,var_TCR_81_sample_freq,var_TCR_90_sample_freq) #binding rows of sample MAIT TCR with variances
+
+
+
+
+
+
+
+sorted_ID_MAIT_freq_noninfected <- tot_MAIT_frequency_noninfected[order(tot_MAIT_frequency_noninfected$ID),]
+#ID of  frequency of Mait cells in noninfected
+ID17_noninfected_freq <- which(sorted_ID_MAIT_freq_noninfected$ID==17)
+ID42_noninfected_freq <- which(sorted_ID_MAIT_freq_noninfected$ID==42)
+ID84_noninfected_freq <- which(sorted_ID_MAIT_freq_noninfected$ID==84)
+ID107_noninfected_freq <- which(sorted_ID_MAIT_freq_noninfected$ID==107)
+ID158_noninfected_freq <- which(sorted_ID_MAIT_freq_noninfected$ID==158)
+ID186_noninfected_freq <- which(sorted_ID_MAIT_freq_noninfected$ID==186)
+
+MAIT_TCR_17_noninfected_freq <-sorted_ID_MAIT_freq_noninfected[ID17_noninfected_freq,] #presents these rows of IDs from data of frequency of MAIT TCRs in noninfected
+var_TCR_17_noninfected_freq <- mutate(MAIT_TCR_17_noninfected_freq, variance=var(x)) #calculating variance across all tp for ID17 and adding a column
+
+MAIT_TCR_42_noninfected_freq <-sorted_ID_MAIT_freq_noninfected[ID42_noninfected_freq,] #presents these rows of IDs from data of frequency of MAIT TCRs in noninfected
+var_TCR_42_noninfected_freq <- mutate(MAIT_TCR_42_noninfected_freq, variance=var(x)) #calculating variance across all tp for ID42 and adding a column
+
+
+MAIT_TCR_84_noninfected_freq <-sorted_ID_MAIT_freq_noninfected[ID84_noninfected_freq,] #presents these rows of IDs from data of frequency of MAIT TCRs in noninfected
+var_TCR_84_noninfected_freq <- mutate(MAIT_TCR_84_noninfected_freq, variance=var(x)) #calculating variance across all tp for ID84 and adding a column
+
+
+MAIT_TCR_107_noninfected_freq <-sorted_ID_MAIT_freq_noninfected[ID107_noninfected_freq,] #presents these rows of IDs from data of frequency of MAIT TCRs in noninfected
+var_TCR_107_noninfected_freq <- mutate(MAIT_TCR_107_noninfected_freq, variance=var(x)) #calculating variance across all tp for ID107 and adding a column
+
+MAIT_TCR_158_noninfected_freq <-sorted_ID_MAIT_freq_noninfected[ID158_noninfected_freq,] #presents these rows of IDs from data of frequency of MAIT TCRs in noninfected
+var_TCR_158_noninfected_freq <- mutate(MAIT_TCR_158_noninfected_freq, variance=var(x)) #calculating variance across all tp for ID158 and adding a column
+
+MAIT_TCR_186_noninfected_freq <-sorted_ID_MAIT_freq_noninfected[ID186_noninfected_freq,] #presents these rows of IDs from data of frequency of MAIT TCRs in noninfected
+var_TCR_186_noninfected_freq <- mutate(MAIT_TCR_186_noninfected_freq, variance=var(x)) #calculating variance across all tp for ID186 and adding a column
+
+
+Var_noninfected_MAIT_freq <- rbind(var_TCR_17_noninfected_freq,var_TCR_42_noninfected_freq,var_TCR_84_noninfected_freq,var_TCR_107_noninfected_freq,var_TCR_158_noninfected_freq,var_TCR_186_noninfected_freq) #binding rows of sample MAIT TCR with variances
